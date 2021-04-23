@@ -38,25 +38,28 @@ public class Controller {
         progressBar.progressProperty().bind(service.progressProperty());
         progressLabel.textProperty().bind(service.messageProperty());
 
-        service.setOnRunning(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                progressBar.setVisible(true);
-                progressLabel.setVisible(true);
-            }
-        });
 
-        progressBar.setVisible(false);
-        progressLabel.setVisible(false);
 
-        service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                progressBar.setVisible(false);
-                progressLabel.setVisible(false);
-            }
-        });
+        // uses set on to set progress bar
+//        service.setOnRunning(workerStateEvent -> {
+//            progressBar.setVisible(true);
+//            progressLabel.setVisible(true);
+//        });
+//
+//        service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+//            @Override
+//            public void handle(WorkerStateEvent workerStateEvent) {
+//                progressBar.setVisible(false);
+//                progressLabel.setVisible(false);
+//            }
+//        });
 
+//        progressBar.setVisible(false);
+//        progressLabel.setVisible(false);
+
+        // Simple way to bind to running.
+        progressBar.visibleProperty().bind(service.runningProperty());
+        progressLabel.visibleProperty().bind(service.runningProperty());
     }
 
     @FXML
